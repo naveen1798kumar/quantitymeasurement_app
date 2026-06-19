@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QuantityTest {
 
     // UC1
-
     @Test
     void given0FeetAnd0Feet_ShouldReturnEqual() {
 
@@ -105,7 +104,6 @@ public class QuantityTest {
     }
 
     // UC2
-
     @Test
     void given0FeetAnd0Inch_ShouldReturnEqual() {
 
@@ -166,6 +164,27 @@ public class QuantityTest {
         assertNotEquals(
                 feet,
                 inch
+        );
+    }
+
+    @Test
+    void given3FeetAnd1Yard_ShouldReturnEqual() {
+
+        Quantity feet =
+                new Quantity(
+                        3,
+                        Unit.FEET
+                );
+
+        Quantity yard =
+                new Quantity(
+                        1,
+                        Unit.YARD
+                );
+
+        assertEquals(
+                feet,
+                yard
         );
     }
 }
