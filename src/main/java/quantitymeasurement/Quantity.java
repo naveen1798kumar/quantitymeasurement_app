@@ -19,6 +19,54 @@ public class Quantity {
         this.unit = unit;
     }
 
+    public Quantity convertTo(
+
+            Unit targetUnit
+
+    ) {
+
+        if (targetUnit == null) {
+
+            throw new IllegalArgumentException(
+
+                    "Target unit cannot be null"
+
+            );
+        }
+
+        double baseValue =
+
+                unit.toBaseUnit(
+                        value
+                );
+
+        double convertedValue =
+
+                baseValue
+
+                        /
+
+                        targetUnit.getConversionFactor();
+
+        return new Quantity(
+
+                convertedValue,
+
+                targetUnit
+
+        );
+    }
+
+    public double getValue() {
+
+        return value;
+    }
+
+    public Unit getUnit() {
+
+        return unit;
+    }
+
     @Override
     public boolean equals(
             Object object
@@ -74,4 +122,11 @@ public class Quantity {
 
         );
     }
+
+    @Override
+    public String toString() {
+
+        return value + " " + unit;
+    }
+
 }

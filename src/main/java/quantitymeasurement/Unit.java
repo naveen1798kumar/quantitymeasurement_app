@@ -25,4 +25,9 @@ public enum Unit {
         return value
                 * conversionFactor;
     }
+
+    public double getConversionFactor() {
+
+        return conversionFactor;
+    }
 }
