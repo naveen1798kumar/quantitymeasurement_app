@@ -187,4 +187,70 @@ public class QuantityTest {
                 yard
         );
     }
+
+    @Test
+
+    void given100CmAnd39Point3701Inch_ShouldReturnEqual() {
+
+        Quantity centimeter =
+                new Quantity(
+                        100,
+                        Unit.CENTIMETER
+                );
+
+        Quantity inch =
+                new Quantity(
+                        39.3701,
+                        Unit.INCH
+                );
+
+        assertEquals(
+                centimeter,
+                inch
+        );
+    }
+
+    @Test
+
+    void given30Point48CmAnd1Feet_ShouldReturnEqual() {
+
+        Quantity centimeter =
+                new Quantity(
+                        30.48,
+                        Unit.CENTIMETER
+                );
+
+        Quantity feet =
+                new Quantity(
+                        1,
+                        Unit.FEET
+                );
+
+        assertEquals(
+                centimeter,
+                feet
+        );
+    }
+
+    @Test
+
+    void given1YardAnd36Inch_ShouldReturnEqual() {
+
+        Quantity yard =
+                new Quantity(
+                        1,
+                        Unit.YARD
+                );
+
+        Quantity inch =
+                new Quantity(
+                        36,
+                        Unit.INCH
+                );
+
+        assertEquals(
+                yard,
+                inch
+        );
+    }
 }
