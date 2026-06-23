@@ -813,4 +813,166 @@ public class QuantityTest {
 
         );
     }
+
+//    UC 7 Test Case
+
+    @Test
+
+    void testAddition_ExplicitTargetUnit_Feet() {
+
+        Quantity result =
+
+                new Quantity(
+                        1,
+                        Unit.FEET
+                )
+
+                        .add(
+
+                                new Quantity(
+                                        12,
+                                        Unit.INCH
+                                ),
+
+                                Unit.FEET
+                        );
+
+        assertEquals(
+
+                new Quantity(
+                        2,
+                        Unit.FEET
+                ),
+
+                result
+        );
+    }
+
+
+    @Test
+
+    void testAddition_ExplicitTargetUnit_Inches() {
+
+        Quantity result =
+
+                new Quantity(
+                        1,
+                        Unit.FEET
+                )
+
+                        .add(
+
+                                new Quantity(
+                                        12,
+                                        Unit.INCH
+                                ),
+
+                                Unit.INCH
+                        );
+
+        assertEquals(
+
+                new Quantity(
+                        24,
+                        Unit.INCH
+                ),
+
+                result
+        );
+    }
+
+
+    @Test
+
+    void testAddition_ExplicitTargetUnit_Yards() {
+
+        Quantity result =
+
+                new Quantity(
+                        1,
+                        Unit.FEET
+                )
+
+                        .add(
+
+                                new Quantity(
+                                        12,
+                                        Unit.INCH
+                                ),
+
+                                Unit.YARD
+                        );
+
+        assertEquals(
+
+                new Quantity(
+                        0.6666667,
+                        Unit.YARD
+                ),
+
+                result
+        );
+    }
+
+
+    @Test
+
+    void testAddition_ExplicitTargetUnit_Centimeters() {
+
+        Quantity result =
+
+                new Quantity(
+                        1,
+                        Unit.INCH
+                )
+
+                        .add(
+
+                                new Quantity(
+                                        1,
+                                        Unit.INCH
+                                ),
+
+                                Unit.CENTIMETER
+                        );
+
+        assertEquals(
+
+                new Quantity(
+                        5.08,
+                        Unit.CENTIMETER
+                ),
+
+                result
+        );
+    }
+
+
+    @Test
+
+    void testAddition_ExplicitTargetUnit_NullTargetUnit() {
+
+        assertThrows(
+
+                IllegalArgumentException.class,
+
+                () ->
+
+                        new Quantity(
+                                1,
+                                Unit.FEET
+                        )
+
+                                .add(
+
+                                        new Quantity(
+                                                12,
+                                                Unit.INCH
+                                        ),
+
+                                        null
+                                )
+
+        );
+    }
 }

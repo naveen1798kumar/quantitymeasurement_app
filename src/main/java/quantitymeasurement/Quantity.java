@@ -8,6 +8,8 @@ public class Quantity {
 
     private final Unit unit;
 
+    private static final double EPSILON = 0.01;
+
     public Quantity(
 
             double value,
@@ -86,13 +88,55 @@ public class Quantity {
 
             Quantity other
 
+    ){
+        return addInternal(
+                other,
+                unit
+        );
+    }
+
+    public Quantity add(
+
+            Quantity other,
+            Unit targetUnit
+
+    ){
+        return addInternal(
+                other,
+                targetUnit
+        );
+    }
+
+    private Quantity addInternal(
+
+            Quantity other,
+
+            Unit targetUnit
+
     ) {
 
-        if (other == null) {
+        if (
+
+                other == null
+
+        ) {
 
             throw new IllegalArgumentException(
 
                     "Quantity cannot be null"
+
+            );
+        }
+
+        if (
+
+                targetUnit == null
+
+        ) {
+
+            throw new IllegalArgumentException(
+
+                    "Target unit cannot be null"
 
             );
         }
@@ -121,9 +165,9 @@ public class Quantity {
 
                         secondValue;
 
-        double result =
+        double convertedResult =
 
-                unit.fromBaseUnit(
+                targetUnit.fromBaseUnit(
 
                         total
 
@@ -131,9 +175,9 @@ public class Quantity {
 
         return new Quantity(
 
-                result,
+                convertedResult,
 
-                unit
+                targetUnit
 
         );
     }
@@ -177,22 +221,48 @@ public class Quantity {
         Quantity quantity =
 
                 (Quantity) object;
+//
+//        return Double.compare(
+//
+//                unit.toBaseUnit(
+//
+//                        value
+//
+//                ),
+//
+//                quantity.unit.toBaseUnit(
+//
+//                        quantity.value
+//
+//                )
+//
+//        ) == 0;
 
-        return Double.compare(
+        double firstValue =
 
                 unit.toBaseUnit(
 
                         value
 
-                ),
+                );
+
+        double secondValue =
 
                 quantity.unit.toBaseUnit(
 
                         quantity.value
 
-                )
+                );
 
-        ) == 0;
+        return Math.abs(
+
+                firstValue
+
+                        -
+
+                        secondValue
+
+        ) < EPSILON;
     }
 
     @Override
@@ -201,12 +271,15 @@ public class Quantity {
 
         return Objects.hash(
 
-                unit.toBaseUnit(
+                Math.round(
 
-                        value
+                        unit.toBaseUnit(
+
+                                value
+
+                        )
 
                 )
-
         );
     }
 
