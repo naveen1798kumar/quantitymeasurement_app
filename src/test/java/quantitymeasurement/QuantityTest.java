@@ -10,14 +10,14 @@ public class QuantityTest {
     @Test
     void given0FeetAnd0Feet_ShouldReturnEqual() {
 
-        Quantity first =
-                new Quantity(
+        Quantity<Unit> first =
+                new Quantity<>(
                         0,
                         Unit.FEET
                 );
 
-        Quantity second =
-                new Quantity(
+        Quantity<Unit> second =
+                new Quantity<>(
                         0,
                         Unit.FEET
                 );
@@ -31,14 +31,14 @@ public class QuantityTest {
     @Test
     void given1FeetAnd1Feet_ShouldReturnEqual() {
 
-        Quantity first =
-                new Quantity(
+        Quantity<Unit> first =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity second =
-                new Quantity(
+        Quantity<Unit> second =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
@@ -52,28 +52,27 @@ public class QuantityTest {
     @Test
     void givenNull_ShouldReturnFalse() {
 
-        Quantity quantity =
-                new Quantity(
+        Quantity<Unit> quantity =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        assertNotEquals(
-                quantity,
-                null
+        assertNotNull(
+                quantity
         );
     }
 
     @Test
     void givenSameReference_ShouldReturnTrue() {
 
-        Quantity first =
-                new Quantity(
+        Quantity<Unit> first =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity second =
+        Quantity<Unit> second =
                 first;
 
         assertSame(
@@ -85,14 +84,14 @@ public class QuantityTest {
     @Test
     void givenDifferentValue_ShouldReturnFalse() {
 
-        Quantity first =
-                new Quantity(
+        Quantity<Unit> first =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity second =
-                new Quantity(
+        Quantity<Unit> second =
+                new Quantity<>(
                         2,
                         Unit.FEET
                 );
@@ -107,14 +106,14 @@ public class QuantityTest {
     @Test
     void given0FeetAnd0Inch_ShouldReturnEqual() {
 
-        Quantity feet =
-                new Quantity(
+        Quantity<Unit> feet =
+                new Quantity<>(
                         0,
                         Unit.FEET
                 );
 
-        Quantity inch =
-                new Quantity(
+        Quantity<Unit> inch =
+                new Quantity<>(
                         0,
                         Unit.INCH
                 );
@@ -128,14 +127,14 @@ public class QuantityTest {
     @Test
     void given1FeetAnd12Inch_ShouldReturnEqual() {
 
-        Quantity feet =
-                new Quantity(
+        Quantity<Unit> feet =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity inch =
-                new Quantity(
+        Quantity<Unit> inch =
+                new Quantity<>(
                         12,
                         Unit.INCH
                 );
@@ -149,14 +148,14 @@ public class QuantityTest {
     @Test
     void given1FeetAnd1Inch_ShouldReturnFalse() {
 
-        Quantity feet =
-                new Quantity(
+        Quantity<Unit> feet =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity inch =
-                new Quantity(
+        Quantity<Unit> inch =
+                new Quantity<>(
                         1,
                         Unit.INCH
                 );
@@ -170,14 +169,14 @@ public class QuantityTest {
     @Test
     void given3FeetAnd1Yard_ShouldReturnEqual() {
 
-        Quantity feet =
-                new Quantity(
+        Quantity<Unit> feet =
+                new Quantity<>(
                         3,
                         Unit.FEET
                 );
 
-        Quantity yard =
-                new Quantity(
+        Quantity<Unit> yard =
+                new Quantity<>(
                         1,
                         Unit.YARD
                 );
@@ -192,14 +191,14 @@ public class QuantityTest {
 
     void given100CmAnd39Point3701Inch_ShouldReturnEqual() {
 
-        Quantity centimeter =
-                new Quantity(
+        Quantity<Unit> centimeter =
+                new Quantity<>(
                         100,
                         Unit.CENTIMETER
                 );
 
-        Quantity inch =
-                new Quantity(
+        Quantity<Unit> inch =
+                new Quantity<>(
                         39.3701,
                         Unit.INCH
                 );
@@ -213,14 +212,14 @@ public class QuantityTest {
     @Test
     void given30Point48CmAnd1Feet_ShouldReturnEqual() {
 
-        Quantity centimeter =
-                new Quantity(
+        Quantity<Unit> centimeter =
+                new Quantity<>(
                         30.48,
                         Unit.CENTIMETER
                 );
 
-        Quantity feet =
-                new Quantity(
+        Quantity<Unit> feet =
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
@@ -234,14 +233,14 @@ public class QuantityTest {
     @Test
     void given1YardAnd36Inch_ShouldReturnEqual() {
 
-        Quantity yard =
-                new Quantity(
+        Quantity<Unit> yard =
+                new Quantity<>(
                         1,
                         Unit.YARD
                 );
 
-        Quantity inch =
-                new Quantity(
+        Quantity<Unit> inch =
+                new Quantity<>(
                         36,
                         Unit.INCH
                 );
@@ -255,22 +254,22 @@ public class QuantityTest {
     @Test
     void given1Feet_WhenConvertedToInch_ShouldReturn12Inch() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 feet.convertTo(
                         Unit.INCH
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         12,
                         Unit.INCH
                 );
@@ -284,22 +283,22 @@ public class QuantityTest {
     @Test
     void given24Inch_WhenConvertedToFeet_ShouldReturn2Feet() {
 
-        Quantity inch =
+        Quantity<Unit> inch =
 
-                new Quantity(
+                new Quantity<>(
                         24,
                         Unit.INCH
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 inch.convertTo(
                         Unit.FEET
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         2,
                         Unit.FEET
                 );
@@ -313,22 +312,22 @@ public class QuantityTest {
     @Test
     void given1Yard_WhenConvertedToInch_ShouldReturn36Inch() {
 
-        Quantity yard =
+        Quantity<Unit> yard =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.YARD
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 yard.convertTo(
                         Unit.INCH
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         36,
                         Unit.INCH
                 );
@@ -342,22 +341,22 @@ public class QuantityTest {
     @Test
     void given36Inch_WhenConvertedToYard_ShouldReturn1Yard() {
 
-        Quantity inch =
+        Quantity<Unit> inch =
 
-                new Quantity(
+                new Quantity<>(
                         36,
                         Unit.INCH
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 inch.convertTo(
                         Unit.YARD
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.YARD
                 );
@@ -371,22 +370,22 @@ public class QuantityTest {
     @Test
     void given30Point48Cm_WhenConvertedToFeet_ShouldReturn1Feet() {
 
-        Quantity centimeter =
+        Quantity<Unit> centimeter =
 
-                new Quantity(
+                new Quantity<>(
                         30.48,
                         Unit.CENTIMETER
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 centimeter.convertTo(
                         Unit.FEET
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
@@ -400,22 +399,22 @@ public class QuantityTest {
     @Test
     void given6Feet_WhenConvertedToYard_ShouldReturn2Yard() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         6,
                         Unit.FEET
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 feet.convertTo(
                         Unit.YARD
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         2,
                         Unit.YARD
                 );
@@ -429,22 +428,22 @@ public class QuantityTest {
     @Test
     void given0Feet_WhenConvertedToInch_ShouldReturn0Inch() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         0,
                         Unit.FEET
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 feet.convertTo(
                         Unit.INCH
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         0,
                         Unit.INCH
                 );
@@ -458,22 +457,22 @@ public class QuantityTest {
     @Test
     void givenMinus1Feet_WhenConvertedToInch_ShouldReturnMinus12Inch() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         -1,
                         Unit.FEET
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 feet.convertTo(
                         Unit.INCH
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         -12,
                         Unit.INCH
                 );
@@ -487,22 +486,22 @@ public class QuantityTest {
     @Test
     void given1Feet_WhenConvertedToFeet_ShouldReturn1Feet() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
 
-        Quantity actual =
+        Quantity<Unit> actual =
 
                 feet.convertTo(
                         Unit.FEET
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
@@ -516,9 +515,9 @@ public class QuantityTest {
     @Test
     void givenNullTargetUnit_ShouldThrowException() {
 
-        Quantity feet =
+        Quantity<Unit> feet =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 );
@@ -537,9 +536,9 @@ public class QuantityTest {
 
     void addFeetPlusFeet() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -547,9 +546,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         2,
 
@@ -557,9 +556,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         3,
 
@@ -580,9 +579,9 @@ public class QuantityTest {
 
     void addFeetPlusInches() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -590,9 +589,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         12,
 
@@ -600,9 +599,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         2,
 
@@ -623,9 +622,9 @@ public class QuantityTest {
 
     void addInchesPlusFeet() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         12,
 
@@ -633,9 +632,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -643,9 +642,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         24,
 
@@ -666,9 +665,9 @@ public class QuantityTest {
 
     void addYardPlusFeet() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -676,9 +675,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         3,
 
@@ -686,9 +685,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         2,
 
@@ -709,9 +708,9 @@ public class QuantityTest {
 
     void addCentimeterPlusInch() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         2.54,
 
@@ -719,9 +718,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -729,9 +728,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         5.08,
 
@@ -752,9 +751,9 @@ public class QuantityTest {
 
     void addZero() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         5,
 
@@ -762,9 +761,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity q2 =
+        Quantity<Unit> q2 =
 
-                new Quantity(
+                new Quantity<>(
 
                         0,
 
@@ -772,9 +771,9 @@ public class QuantityTest {
 
                 );
 
-        Quantity expected =
+        Quantity<Unit> expected =
 
-                new Quantity(
+                new Quantity<>(
 
                         5,
 
@@ -795,9 +794,9 @@ public class QuantityTest {
 
     void addNullQuantity() {
 
-        Quantity q1 =
+        Quantity<Unit> q1 =
 
-                new Quantity(
+                new Quantity<>(
 
                         1,
 
@@ -820,16 +819,16 @@ public class QuantityTest {
 
     void testAddition_ExplicitTargetUnit_Feet() {
 
-        Quantity result =
+        Quantity<Unit> result =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 )
 
                         .add(
 
-                                new Quantity(
+                                new Quantity<>(
                                         12,
                                         Unit.INCH
                                 ),
@@ -839,7 +838,7 @@ public class QuantityTest {
 
         assertEquals(
 
-                new Quantity(
+                new Quantity<>(
                         2,
                         Unit.FEET
                 ),
@@ -853,16 +852,16 @@ public class QuantityTest {
 
     void testAddition_ExplicitTargetUnit_Inches() {
 
-        Quantity result =
+        Quantity<Unit> result =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 )
 
                         .add(
 
-                                new Quantity(
+                                new Quantity<>(
                                         12,
                                         Unit.INCH
                                 ),
@@ -872,7 +871,7 @@ public class QuantityTest {
 
         assertEquals(
 
-                new Quantity(
+                new Quantity<>(
                         24,
                         Unit.INCH
                 ),
@@ -886,16 +885,16 @@ public class QuantityTest {
 
     void testAddition_ExplicitTargetUnit_Yards() {
 
-        Quantity result =
+        Quantity<Unit> result =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.FEET
                 )
 
                         .add(
 
-                                new Quantity(
+                                new Quantity<>(
                                         12,
                                         Unit.INCH
                                 ),
@@ -905,7 +904,7 @@ public class QuantityTest {
 
         assertEquals(
 
-                new Quantity(
+                new Quantity<>(
                         0.6666667,
                         Unit.YARD
                 ),
@@ -919,16 +918,16 @@ public class QuantityTest {
 
     void testAddition_ExplicitTargetUnit_Centimeters() {
 
-        Quantity result =
+        Quantity<Unit> result =
 
-                new Quantity(
+                new Quantity<>(
                         1,
                         Unit.INCH
                 )
 
                         .add(
 
-                                new Quantity(
+                                new Quantity<>(
                                         1,
                                         Unit.INCH
                                 ),
@@ -938,7 +937,7 @@ public class QuantityTest {
 
         assertEquals(
 
-                new Quantity(
+                new Quantity<>(
                         5.08,
                         Unit.CENTIMETER
                 ),
@@ -958,14 +957,14 @@ public class QuantityTest {
 
                 () ->
 
-                        new Quantity(
+                        new Quantity<>(
                                 1,
                                 Unit.FEET
                         )
 
                                 .add(
 
-                                        new Quantity(
+                                        new Quantity<>(
                                                 12,
                                                 Unit.INCH
                                         ),

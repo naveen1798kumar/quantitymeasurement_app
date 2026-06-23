@@ -2,11 +2,11 @@ package quantitymeasurement;
 
 import java.util.Objects;
 
-public class Quantity {
+public class Quantity<U extends IMeasurable> {
 
     private final double value;
 
-    private final Unit unit;
+    private final U unit;
 
     private static final double EPSILON = 0.01;
 
@@ -14,7 +14,7 @@ public class Quantity {
 
             double value,
 
-            Unit unit
+            U unit
 
     ) {
 
@@ -41,9 +41,9 @@ public class Quantity {
         this.unit = unit;
     }
 
-    public Quantity convertTo(
+    public Quantity<U> convertTo(
 
-            Unit targetUnit
+            U targetUnit
 
     ) {
 
@@ -72,7 +72,7 @@ public class Quantity {
 
                 );
 
-        return new Quantity(
+        return new Quantity<>(
 
                 convertedValue,
 
@@ -84,9 +84,9 @@ public class Quantity {
 
     // UC6
 
-    public Quantity add(
+    public Quantity<U> add(
 
-            Quantity other
+            Quantity<U> other
 
     ){
         return addInternal(
@@ -95,10 +95,10 @@ public class Quantity {
         );
     }
 
-    public Quantity add(
+    public Quantity<U> add(
 
-            Quantity other,
-            Unit targetUnit
+            Quantity<U> other,
+            U targetUnit
 
     ){
         return addInternal(
@@ -107,11 +107,11 @@ public class Quantity {
         );
     }
 
-    private Quantity addInternal(
+    private Quantity<U> addInternal(
 
-            Quantity other,
+            Quantity<U> other,
 
-            Unit targetUnit
+            U targetUnit
 
     ) {
 
@@ -173,7 +173,7 @@ public class Quantity {
 
                 );
 
-        return new Quantity(
+        return new Quantity<>(
 
                 convertedResult,
 
@@ -187,7 +187,7 @@ public class Quantity {
         return value;
     }
 
-    public Unit getUnit() {
+    public U getUnit() {
 
         return unit;
     }
@@ -206,21 +206,15 @@ public class Quantity {
         }
 
         if (object == null ||
-
-                getClass()
-
-                        !=
-
-                        object.getClass()
-
+                getClass() != object.getClass()
         ) {
 
             return false;
         }
 
-        Quantity quantity =
+        Quantity<?> quantity =
 
-                (Quantity) object;
+                (Quantity<?>) object;
 //
 //        return Double.compare(
 //
@@ -237,6 +231,20 @@ public class Quantity {
 //                )
 //
 //        ) == 0;
+
+
+        if (
+
+                unit.getClass()
+
+                        !=
+
+                        quantity.unit.getClass()
+
+        ) {
+
+            return false;
+        }
 
         double firstValue =
 
@@ -263,6 +271,7 @@ public class Quantity {
                         secondValue
 
         ) < EPSILON;
+
     }
 
     @Override

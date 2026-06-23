@@ -1,6 +1,6 @@
 package quantitymeasurement;
 
-public enum Unit {
+public enum Unit implements IMeasurable{
 
     FEET(30.48),
 
@@ -42,5 +42,12 @@ public enum Unit {
     public double getConversionFactor() {
 
         return conversionFactor;
+    }
+
+    @Override
+
+    public String getUnitName() {
+
+        return name();
     }
 }

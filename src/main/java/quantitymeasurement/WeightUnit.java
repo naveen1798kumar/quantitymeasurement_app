@@ -1,6 +1,6 @@
 package quantitymeasurement;
 
-public enum WeightUnit {
+public enum WeightUnit implements IMeasurable {
 
     KILOGRAM(1),
 
@@ -50,5 +50,12 @@ public enum WeightUnit {
     public double getConversionFactor() {
 
         return conversionFactor;
+    }
+
+    @Override
+
+    public String getUnitName() {
+
+        return name();
     }
 }

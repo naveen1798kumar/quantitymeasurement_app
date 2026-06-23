@@ -10,9 +10,9 @@ public class QuantityWeightTest {
 
     void given1KgAnd1000Gram_ShouldReturnEqual() {
 
-        QuantityWeight kilogram =
+        Quantity<WeightUnit> kilogram =
 
-                new QuantityWeight(
+                new Quantity<>(
 
                         1,
 
@@ -20,9 +20,9 @@ public class QuantityWeightTest {
 
                 );
 
-        QuantityWeight gram =
+        Quantity<WeightUnit> gram =
 
-                new QuantityWeight(
+                new Quantity<>(
 
                         1000,
 
