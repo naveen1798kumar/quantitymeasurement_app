@@ -975,4 +975,125 @@ public class QuantityTest {
 
         );
     }
+
+//    UC 8 Test Case
+
+    @Test
+
+    void testFeetBaseConversion() {
+
+        assertEquals(
+
+                30.48,
+
+                Unit.FEET.toBaseUnit(
+
+                        1
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testInchBaseConversion() {
+
+        assertEquals(
+
+                30.48,
+
+                Unit.INCH.toBaseUnit(
+
+                        12
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testYardBaseConversion() {
+
+        assertEquals(
+
+                91.44,
+
+                Unit.YARD.toBaseUnit(
+
+                        1
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testCentimeterBaseConversion() {
+
+        assertEquals(
+
+                30.48,
+
+                Unit.CENTIMETER.toBaseUnit(
+
+                        30.48
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testBaseToFeet() {
+
+        assertEquals(
+
+                2,
+
+                Unit.FEET.fromBaseUnit(
+
+                        60.96
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testBaseToInches() {
+
+        assertEquals(
+
+                12,
+
+                Unit.INCH.fromBaseUnit(
+
+                        30.48
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testBaseToYards() {
+
+        assertEquals(
+
+                1,
+
+                Unit.YARD.fromBaseUnit(
+
+                        91.44
+
+                )
+
+        );
+    }
 }
