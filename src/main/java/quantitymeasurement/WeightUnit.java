@@ -1,0 +1,54 @@
+package quantitymeasurement;
+
+public enum WeightUnit {
+
+    KILOGRAM(1),
+
+    GRAM(0.001),
+
+    POUND(0.453592);
+
+    private final double conversionFactor;
+
+    WeightUnit(
+
+            double conversionFactor
+
+    ) {
+
+        this.conversionFactor =
+
+                conversionFactor;
+    }
+
+    public double toBaseUnit(
+
+            double value
+
+    ) {
+
+        return value
+
+                *
+
+                conversionFactor;
+    }
+
+    public double fromBaseUnit(
+
+            double value
+
+    ) {
+
+        return value
+
+                /
+
+                conversionFactor;
+    }
+
+    public double getConversionFactor() {
+
+        return conversionFactor;
+    }
+}
