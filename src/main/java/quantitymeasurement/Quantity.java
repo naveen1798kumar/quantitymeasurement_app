@@ -182,6 +182,231 @@ public class Quantity<U extends IMeasurable> {
         );
     }
 
+
+//    UC 12 Subtract usecase
+public Quantity<U> subtract(
+
+        Quantity<U> other
+
+){
+
+    return subtractInternal(
+
+            other,
+
+            unit
+
+    );
+}
+
+
+    public Quantity<U> subtract(
+
+            Quantity<U> other,
+
+            U targetUnit
+
+    ){
+
+        return subtractInternal(
+
+                other,
+
+                targetUnit
+
+        );
+    }
+
+    private Quantity<U> subtractInternal(
+
+            Quantity<U> other,
+
+            U targetUnit
+
+    ){
+
+        if (
+
+                other == null
+
+        ){
+
+            throw new IllegalArgumentException(
+
+                    "Quantity cannot be null"
+
+            );
+        }
+
+        if (
+
+                targetUnit == null
+
+        ){
+
+            throw new IllegalArgumentException(
+
+                    "Target unit cannot be null"
+
+            );
+        }
+
+
+        if (
+
+                unit.getClass()
+
+                        !=
+
+                        other.unit.getClass()
+
+        ){
+
+            throw new IllegalArgumentException(
+
+                    "Different categories cannot be subtracted"
+
+            );
+        }
+
+
+        double firstValue =
+
+                unit.toBaseUnit(
+
+                        value
+
+                );
+
+
+        double secondValue =
+
+                other.unit.toBaseUnit(
+
+                        other.value
+
+                );
+
+
+        double result =
+
+                firstValue
+
+                        -
+
+                        secondValue;
+
+
+        double convertedResult =
+
+                targetUnit.fromBaseUnit(
+
+                        result
+
+                );
+
+
+        convertedResult =
+
+                Math.round(
+
+                        convertedResult
+
+                                * 100
+
+                )
+
+                        / 100.0;
+
+
+        return new Quantity<>(
+
+                convertedResult,
+
+                targetUnit
+
+        );
+    }
+
+//    UC12 Division
+
+    public double divide(
+
+            Quantity<U> other
+
+    ){
+
+        if (
+
+                other == null
+
+        ){
+
+            throw new IllegalArgumentException(
+
+                    "Quantity cannot be null"
+
+            );
+        }
+
+
+        if (
+
+                unit.getClass()
+
+                        !=
+
+                        other.unit.getClass()
+
+        ){
+
+            throw new IllegalArgumentException(
+
+                    "Different categories cannot be divided"
+
+            );
+        }
+
+
+        double divisor =
+
+                other.unit.toBaseUnit(
+
+                        other.value
+
+                );
+
+
+        if (
+
+                divisor == 0
+
+        ){
+
+            throw new ArithmeticException(
+
+                    "Cannot divide by zero"
+
+            );
+        }
+
+
+        double dividend =
+
+                unit.toBaseUnit(
+
+                        value
+
+                );
+
+
+        return dividend
+
+                /
+
+                divisor;
+    }
+
     public double getValue() {
 
         return value;

@@ -1095,4 +1095,176 @@ public class QuantityTest {
 
         );
     }
+
+//    UC12 usecases
+
+    @Test
+
+    void testSubtraction_SameUnit() {
+
+        Quantity<Unit> first =
+
+                new Quantity<>(
+
+                        10,
+
+                        Unit.FEET
+
+                );
+
+        Quantity<Unit> second =
+
+                new Quantity<>(
+
+                        5,
+
+                        Unit.FEET
+
+                );
+
+        Quantity<Unit> expected =
+
+                new Quantity<>(
+
+                        5,
+
+                        Unit.FEET
+
+                );
+
+        assertEquals(
+
+                expected,
+
+                first.subtract(
+
+                        second
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testSubtraction_CrossUnit() {
+
+        Quantity<Unit> first =
+
+                new Quantity<>(
+
+                        10,
+
+                        Unit.FEET
+
+                );
+
+        Quantity<Unit> second =
+
+                new Quantity<>(
+
+                        6,
+
+                        Unit.INCH
+
+                );
+
+        Quantity<Unit> expected =
+
+                new Quantity<>(
+
+                        9.5,
+
+                        Unit.FEET
+
+                );
+
+        assertEquals(
+
+                expected,
+
+                first.subtract(
+
+                        second
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testDivision() {
+
+        Quantity<Unit> first =
+
+                new Quantity<>(
+
+                        10,
+
+                        Unit.FEET
+
+                );
+
+        Quantity<Unit> second =
+
+                new Quantity<>(
+
+                        2,
+
+                        Unit.FEET
+
+                );
+
+        assertEquals(
+
+                5.0,
+
+                first.divide(
+
+                        second
+
+                )
+
+        );
+    }
+
+    @Test
+
+    void testDivisionByZero() {
+
+        Quantity<Unit> first =
+
+                new Quantity<>(
+
+                        10,
+
+                        Unit.FEET
+
+                );
+
+        Quantity<Unit> second =
+
+                new Quantity<>(
+
+                        0,
+
+                        Unit.FEET
+
+                );
+
+        assertThrows(
+
+                ArithmeticException.class,
+
+                () ->
+
+                        first.divide(
+
+                                second
+
+                        )
+
+        );
+    }
 }
