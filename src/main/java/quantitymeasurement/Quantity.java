@@ -1,6 +1,7 @@
 package quantitymeasurement;
 
 import java.util.Objects;
+import java.util.function.DoubleBinaryOperator;
 
 public class Quantity<U extends IMeasurable> {
 
@@ -40,6 +41,9 @@ public class Quantity<U extends IMeasurable> {
 
         this.unit = unit;
     }
+
+
+    // ================= UC5 =================
 
     public Quantity<U> convertTo(
 
@@ -82,36 +86,89 @@ public class Quantity<U extends IMeasurable> {
     }
 
 
-    // UC6
+    // ================= UC13 =================
 
-    public Quantity<U> add(
+    private enum ArithmeticOperation {
 
-            Quantity<U> other
+        ADD(
 
-    ){
-        return addInternal(
-                other,
-                unit
+                (a, b)
+
+                        ->
+
+                        a + b
+
+        ),
+
+        SUBTRACT(
+
+                (a, b)
+
+                        ->
+
+                        a - b
+
+        ),
+
+        DIVIDE(
+
+                (a, b) -> {
+
+                    if (
+
+                            b == 0
+
+                    ) {
+
+                        throw new ArithmeticException(
+
+                                "Cannot divide by zero"
+
+                        );
+                    }
+
+                    return a / b;
+                }
+
         );
+
+        private final DoubleBinaryOperator operation;
+
+        ArithmeticOperation(
+
+                DoubleBinaryOperator operation
+
+        ) {
+
+            this.operation = operation;
+        }
+
+        public double compute(
+
+                double a,
+
+                double b
+
+        ) {
+
+            return operation.applyAsDouble(
+
+                    a,
+
+                    b
+
+            );
+        }
     }
 
-    public Quantity<U> add(
 
-            Quantity<U> other,
-            U targetUnit
-
-    ){
-        return addInternal(
-                other,
-                targetUnit
-        );
-    }
-
-    private Quantity<U> addInternal(
+    private void validateArithmeticOperands(
 
             Quantity<U> other,
 
-            U targetUnit
+            U targetUnit,
+
+            boolean targetUnitRequired
 
     ) {
 
@@ -130,7 +187,28 @@ public class Quantity<U extends IMeasurable> {
 
         if (
 
-                targetUnit == null
+                unit.getClass()
+
+                        !=
+
+                        other.unit.getClass()
+
+        ) {
+
+            throw new IllegalArgumentException(
+
+                    "Different categories are not allowed"
+
+            );
+        }
+
+        if (
+
+                targetUnitRequired
+
+                        &&
+
+                        targetUnit == null
 
         ) {
 
@@ -141,6 +219,41 @@ public class Quantity<U extends IMeasurable> {
             );
         }
 
+        if (
+
+                !Double.isFinite(
+
+                        value
+
+                )
+
+                        ||
+
+                        !Double.isFinite(
+
+                                other.value
+
+                        )
+
+        ) {
+
+            throw new IllegalArgumentException(
+
+                    "Invalid value"
+
+            );
+        }
+    }
+
+
+    private double performBaseArithmetic(
+
+            Quantity<U> other,
+
+            ArithmeticOperation operation
+
+    ) {
+
         double firstValue =
 
                 unit.toBaseUnit(
@@ -157,47 +270,94 @@ public class Quantity<U extends IMeasurable> {
 
                 );
 
-        double total =
+        return operation.compute(
 
-                firstValue
+                firstValue,
 
-                        +
+                secondValue
 
-                        secondValue;
+        );
+    }
 
-        double convertedResult =
+    // ================= UC6 =================
+
+    public Quantity<U> add(
+
+            Quantity<U> other
+
+    ) {
+
+        return add(
+
+                other,
+
+                unit
+
+        );
+    }
+
+
+    public Quantity<U> add(
+
+            Quantity<U> other,
+
+            U targetUnit
+
+    ) {
+
+        validateArithmeticOperands(
+
+                other,
+
+                targetUnit,
+
+                true
+
+        );
+
+        double result =
+
+                performBaseArithmetic(
+
+                        other,
+
+                        ArithmeticOperation.ADD
+
+                );
+
+        double converted =
 
                 targetUnit.fromBaseUnit(
 
-                        total
+                        result
 
                 );
 
         return new Quantity<>(
 
-                convertedResult,
-
+                converted,
                 targetUnit
 
         );
     }
 
 
-//    UC 12 Subtract usecase
-public Quantity<U> subtract(
+    // ================= UC12 =================
 
-        Quantity<U> other
+    public Quantity<U> subtract(
 
-){
+            Quantity<U> other
 
-    return subtractInternal(
+    ) {
 
-            other,
+        return subtract(
 
-            unit
+                other,
 
-    );
-}
+                unit
+
+        );
+    }
 
 
     public Quantity<U> subtract(
@@ -206,98 +366,29 @@ public Quantity<U> subtract(
 
             U targetUnit
 
-    ){
+    ) {
 
-        return subtractInternal(
+        validateArithmeticOperands(
 
                 other,
 
-                targetUnit
+                targetUnit,
+
+                true
 
         );
-    }
-
-    private Quantity<U> subtractInternal(
-
-            Quantity<U> other,
-
-            U targetUnit
-
-    ){
-
-        if (
-
-                other == null
-
-        ){
-
-            throw new IllegalArgumentException(
-
-                    "Quantity cannot be null"
-
-            );
-        }
-
-        if (
-
-                targetUnit == null
-
-        ){
-
-            throw new IllegalArgumentException(
-
-                    "Target unit cannot be null"
-
-            );
-        }
-
-
-        if (
-
-                unit.getClass()
-
-                        !=
-
-                        other.unit.getClass()
-
-        ){
-
-            throw new IllegalArgumentException(
-
-                    "Different categories cannot be subtracted"
-
-            );
-        }
-
-
-        double firstValue =
-
-                unit.toBaseUnit(
-
-                        value
-
-                );
-
-
-        double secondValue =
-
-                other.unit.toBaseUnit(
-
-                        other.value
-
-                );
-
 
         double result =
 
-                firstValue
+                performBaseArithmetic(
 
-                        -
+                        other,
 
-                        secondValue;
+                        ArithmeticOperation.SUBTRACT
 
+                );
 
-        double convertedResult =
+        double converted =
 
                 targetUnit.fromBaseUnit(
 
@@ -305,107 +396,44 @@ public Quantity<U> subtract(
 
                 );
 
-
-        convertedResult =
-
-                Math.round(
-
-                        convertedResult
-
-                                * 100
-
-                )
-
-                        / 100.0;
-
-
         return new Quantity<>(
 
-                convertedResult,
-
+                converted,
                 targetUnit
 
         );
     }
 
-//    UC12 Division
+
+    // ================= UC12 =================
 
     public double divide(
 
             Quantity<U> other
 
-    ){
+    ) {
 
-        if (
+        validateArithmeticOperands(
 
-                other == null
+                other,
 
-        ){
+                null,
 
-            throw new IllegalArgumentException(
+                false
 
-                    "Quantity cannot be null"
+        );
 
-            );
-        }
+        return performBaseArithmetic(
 
+                other,
 
-        if (
+                ArithmeticOperation.DIVIDE
 
-                unit.getClass()
-
-                        !=
-
-                        other.unit.getClass()
-
-        ){
-
-            throw new IllegalArgumentException(
-
-                    "Different categories cannot be divided"
-
-            );
-        }
-
-
-        double divisor =
-
-                other.unit.toBaseUnit(
-
-                        other.value
-
-                );
-
-
-        if (
-
-                divisor == 0
-
-        ){
-
-            throw new ArithmeticException(
-
-                    "Cannot divide by zero"
-
-            );
-        }
-
-
-        double dividend =
-
-                unit.toBaseUnit(
-
-                        value
-
-                );
-
-
-        return dividend
-
-                /
-
-                divisor;
+        );
     }
+
+
+    // ================= Getters =================
 
     public double getValue() {
 
@@ -417,6 +445,9 @@ public Quantity<U> subtract(
         return unit;
     }
 
+
+    // ================= Equals =================
+
     @Override
 
     public boolean equals(
@@ -425,13 +456,27 @@ public Quantity<U> subtract(
 
     ) {
 
-        if (this == object) {
+        if (
+
+                this == object
+
+        ) {
 
             return true;
         }
 
-        if (object == null ||
-                getClass() != object.getClass()
+        if (
+
+                object == null
+
+                        ||
+
+                        getClass()
+
+                                !=
+
+                                object.getClass()
+
         ) {
 
             return false;
@@ -440,23 +485,6 @@ public Quantity<U> subtract(
         Quantity<?> quantity =
 
                 (Quantity<?>) object;
-//
-//        return Double.compare(
-//
-//                unit.toBaseUnit(
-//
-//                        value
-//
-//                ),
-//
-//                quantity.unit.toBaseUnit(
-//
-//                        quantity.value
-//
-//                )
-//
-//        ) == 0;
-
 
         if (
 
@@ -496,8 +524,10 @@ public Quantity<U> subtract(
                         secondValue
 
         ) < EPSILON;
-
     }
+
+
+    // ================= Hashcode =================
 
     @Override
 
@@ -514,8 +544,12 @@ public Quantity<U> subtract(
                         )
 
                 )
+
         );
     }
+
+
+    // ================= ToString =================
 
     @Override
 
