@@ -21,6 +21,13 @@ public enum WeightUnit implements IMeasurable {
                 conversionFactor;
     }
 
+    @Override
+    public double getConversionFactor() {
+
+        return conversionFactor;
+    }
+
+    @Override
     public double toBaseUnit(
 
             double value
@@ -29,11 +36,10 @@ public enum WeightUnit implements IMeasurable {
 
         return value
 
-                *
-
-                conversionFactor;
+                * conversionFactor;
     }
 
+    @Override
     public double fromBaseUnit(
 
             double value
@@ -42,20 +48,30 @@ public enum WeightUnit implements IMeasurable {
 
         return value
 
-                /
-
-                conversionFactor;
-    }
-
-    public double getConversionFactor() {
-
-        return conversionFactor;
+                / conversionFactor;
     }
 
     @Override
-
     public String getUnitName() {
 
         return name();
+    }
+
+    // ==========================
+    // UC14
+    // ==========================
+
+//    @Override
+//    public SupportsArithmetic getArithmeticSupport() {
+//
+//        return () -> true;
+//
+//    }
+
+    @Override
+    public Class<?> getMeasurementType() {
+
+        return WeightUnit.class;
+
     }
 }

@@ -14,7 +14,7 @@ public enum VolumeUnit implements IMeasurable {
 
             double conversionFactor
 
-    ){
+    ) {
 
         this.conversionFactor =
 
@@ -22,44 +22,56 @@ public enum VolumeUnit implements IMeasurable {
     }
 
     @Override
+    public double getConversionFactor() {
 
+        return conversionFactor;
+    }
+
+    @Override
     public double toBaseUnit(
 
             double value
 
-    ){
+    ) {
 
         return value
 
-                *
-
-                conversionFactor;
+                * conversionFactor;
     }
 
     @Override
-
     public double fromBaseUnit(
 
             double value
 
-    ){
+    ) {
 
         return value
 
-                /
-
-                conversionFactor;
+                / conversionFactor;
     }
 
     @Override
-
-    public String getUnitName(){
+    public String getUnitName() {
 
         return name();
     }
 
-    public double getConversionFactor(){
+    // ==========================
+    // UC14
+    // ==========================
 
-        return conversionFactor;
+//    @Override
+//    public SupportsArithmetic getArithmeticSupport() {
+//
+//        return () -> true;
+//
+//    }
+
+    @Override
+    public Class<?> getMeasurementType() {
+
+        return VolumeUnit.class;
+
     }
 }

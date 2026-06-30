@@ -1,6 +1,6 @@
 package quantitymeasurement;
 
-public enum Unit implements IMeasurable{
+public enum Unit implements IMeasurable {
 
     FEET(30.48),
 
@@ -12,11 +12,24 @@ public enum Unit implements IMeasurable{
 
     private final double conversionFactor;
 
-    Unit(double conversionFactor) {
+    Unit(
 
-        this.conversionFactor = conversionFactor;
+            double conversionFactor
+
+    ) {
+
+        this.conversionFactor =
+
+                conversionFactor;
     }
 
+    @Override
+    public double getConversionFactor() {
+
+        return conversionFactor;
+    }
+
+    @Override
     public double toBaseUnit(
 
             double value
@@ -28,6 +41,7 @@ public enum Unit implements IMeasurable{
                 * conversionFactor;
     }
 
+    @Override
     public double fromBaseUnit(
 
             double value
@@ -39,15 +53,27 @@ public enum Unit implements IMeasurable{
                 / conversionFactor;
     }
 
-    public double getConversionFactor() {
-
-        return conversionFactor;
-    }
-
     @Override
-
     public String getUnitName() {
 
         return name();
+    }
+
+    // ==========================
+    // UC14
+    // ==========================
+
+//    @Override
+//    public SupportsArithmetic getArithmeticSupport() {
+//
+//        return () -> true;
+//
+//    }
+
+    @Override
+    public Class<?> getMeasurementType() {
+
+        return Unit.class;
+
     }
 }

@@ -60,21 +60,36 @@ public class Quantity<U extends IMeasurable> {
             );
         }
 
+        if (
+
+                unit instanceof TemperatureUnit
+
+        ) {
+
+            double base =
+
+                    unit.toBaseUnit(value);
+
+            double converted =
+
+                    targetUnit.fromBaseUnit(base);
+
+            return new Quantity<>(
+
+                    converted,
+
+                    targetUnit
+
+            );
+        }
+
         double baseValue =
 
-                unit.toBaseUnit(
-
-                        value
-
-                );
+                unit.toBaseUnit(value);
 
         double convertedValue =
 
-                targetUnit.fromBaseUnit(
-
-                        baseValue
-
-                );
+                targetUnit.fromBaseUnit(baseValue);
 
         return new Quantity<>(
 
@@ -187,11 +202,11 @@ public class Quantity<U extends IMeasurable> {
 
         if (
 
-                unit.getClass()
+                unit.getMeasurementType()
 
                         !=
 
-                        other.unit.getClass()
+                        other.unit.getMeasurementType()
 
         ) {
 
@@ -253,6 +268,8 @@ public class Quantity<U extends IMeasurable> {
             ArithmeticOperation operation
 
     ) {
+
+        unit.validateOperationSupport(operation.name());
 
         double firstValue =
 
@@ -488,11 +505,11 @@ public class Quantity<U extends IMeasurable> {
 
         if (
 
-                unit.getClass()
+                unit.getMeasurementType()
 
                         !=
 
-                        quantity.unit.getClass()
+                        quantity.unit.getMeasurementType()
 
         ) {
 
@@ -534,6 +551,8 @@ public class Quantity<U extends IMeasurable> {
     public int hashCode() {
 
         return Objects.hash(
+
+                unit.getMeasurementType(),
 
                 Math.round(
 
