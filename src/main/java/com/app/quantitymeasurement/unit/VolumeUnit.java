@@ -68,10 +68,17 @@ public enum VolumeUnit implements IMeasurable {
 //
 //    }
 
-    @Override
-    public Class<?> getMeasurementType() {
+//    @Override
+//    public Class<?> getMeasurementType() {
+//
+//        return VolumeUnit.class;
+//
+//    }
 
-        return VolumeUnit.class;
+    @Override
+    public String getMeasurementType() {
+
+        return "VOLUME";
 
     }
 }

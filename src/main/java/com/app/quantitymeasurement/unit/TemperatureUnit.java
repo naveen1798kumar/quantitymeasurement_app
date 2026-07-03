@@ -97,10 +97,17 @@ public enum TemperatureUnit implements IMeasurable {
 
     }
 
-    @Override
-    public Class<?> getMeasurementType() {
+//    @Override
+//    public Class<?> getMeasurementType() {
+//
+//        return TemperatureUnit.class;
+//
+//    }
 
-        return TemperatureUnit.class;
+    @Override
+    public String getMeasurementType() {
+
+        return "TEMPERATURE";
 
     }
 }
