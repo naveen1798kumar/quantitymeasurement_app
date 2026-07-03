@@ -1,4 +1,9 @@
-package quantitymeasurement;
+package com.app.quantitymeasurement.service;
+
+import com.app.quantitymeasurement.unit.IMeasurable;
+import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
+import com.app.quantitymeasurement.entity.Quantity;
+import com.app.quantitymeasurement.entity.QuantityMeasurementEntity;
 
 public class QuantityMeasurementServiceImpl
         implements IQuantityMeasurementService {

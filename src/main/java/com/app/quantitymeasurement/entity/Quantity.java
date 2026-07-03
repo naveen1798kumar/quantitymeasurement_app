@@ -1,4 +1,7 @@
-package quantitymeasurement;
+package com.app.quantitymeasurement.entity;
+
+import com.app.quantitymeasurement.unit.IMeasurable;
+import com.app.quantitymeasurement.unit.TemperatureUnit;
 
 import java.util.Objects;
 import java.util.function.DoubleBinaryOperator;

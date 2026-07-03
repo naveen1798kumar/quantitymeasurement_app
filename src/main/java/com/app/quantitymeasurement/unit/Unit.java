@@ -1,16 +1,18 @@
-package quantitymeasurement;
+package com.app.quantitymeasurement.unit;
 
-public enum WeightUnit implements IMeasurable {
+public enum Unit implements IMeasurable {
 
-    KILOGRAM(1),
+    FEET(30.48),
 
-    GRAM(0.001),
+    INCH(2.54),
 
-    POUND(0.453592);
+    YARD(91.44),
+
+    CENTIMETER(1);
 
     private final double conversionFactor;
 
-    WeightUnit(
+    Unit(
 
             double conversionFactor
 
@@ -71,7 +73,7 @@ public enum WeightUnit implements IMeasurable {
     @Override
     public Class<?> getMeasurementType() {
 
-        return WeightUnit.class;
+        return Unit.class;
 
     }
 }
