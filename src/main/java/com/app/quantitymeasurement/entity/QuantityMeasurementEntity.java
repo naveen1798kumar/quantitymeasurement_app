@@ -10,9 +10,19 @@ public class QuantityMeasurementEntity {
 
     private String operation;
 
-    private Object result;
+    private String result;
+
+    private Long id;
 
     private LocalDateTime createdAt;
+
+    public Long getId(){
+        return id;
+    };
+
+    public void setId(Long id){
+        this.id = id;
+    };
 
     public QuantityMeasurementEntity(
 
@@ -22,18 +32,14 @@ public class QuantityMeasurementEntity {
 
             String operation,
 
-            Object result
+            String result
 
     ) {
 
         this.firstQuantity = firstQuantity;
-
         this.secondQuantity = secondQuantity;
-
         this.operation = operation;
-
         this.result = result;
-
         this.createdAt = LocalDateTime.now();
 
     }
@@ -86,7 +92,7 @@ public class QuantityMeasurementEntity {
 
     }
 
-    public Object getResult() {
+    public String getResult() {
 
         return result;
 
@@ -94,7 +100,7 @@ public class QuantityMeasurementEntity {
 
     public void setResult(
 
-            Object result
+            String result
 
     ) {
 
@@ -105,6 +111,16 @@ public class QuantityMeasurementEntity {
     public LocalDateTime getCreatedAt() {
 
         return createdAt;
+
+    }
+
+    public void setCreatedAt(
+
+            LocalDateTime createdAt
+
+    ) {
+
+        this.createdAt = createdAt;
 
     }
 
@@ -127,5 +143,7 @@ public class QuantityMeasurementEntity {
                 '}';
 
     }
+
+
 
 }

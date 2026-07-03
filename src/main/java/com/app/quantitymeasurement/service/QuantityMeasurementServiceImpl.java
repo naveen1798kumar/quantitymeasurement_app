@@ -64,7 +64,7 @@ public class QuantityMeasurementServiceImpl
 
                         "CONVERT",
 
-                        result
+                        result.toString()
 
                 )
 
@@ -108,7 +108,7 @@ public class QuantityMeasurementServiceImpl
 
                         "ADD",
 
-                        result
+                        result.toString()
 
                 )
 
@@ -156,7 +156,7 @@ public class QuantityMeasurementServiceImpl
 
                         "ADD",
 
-                        result
+                        result.toString()
 
                 )
 
@@ -200,7 +200,7 @@ public class QuantityMeasurementServiceImpl
 
                         "SUBTRACT",
 
-                        result
+                        result.toString()
 
                 )
 
@@ -248,7 +248,7 @@ public class QuantityMeasurementServiceImpl
 
                         "SUBTRACT",
 
-                        result
+                        result.toString()
 
                 )
 
@@ -292,7 +292,7 @@ public class QuantityMeasurementServiceImpl
 
                         "DIVIDE",
 
-                        result
+                        String.valueOf(result)
 
                 )
 
@@ -336,7 +336,7 @@ public class QuantityMeasurementServiceImpl
 
                         "COMPARE",
 
-                        result
+                        String.valueOf(result)
 
                 )
 

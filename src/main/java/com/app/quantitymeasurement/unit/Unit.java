@@ -70,10 +70,15 @@ public enum Unit implements IMeasurable {
 //
 //    }
 
+//    @Override
+//    public Class<?> getMeasurementType() {
+//
+//        return Unit.class;
+//
+//    }
+
     @Override
-    public Class<?> getMeasurementType() {
-
-        return Unit.class;
-
+    public String getMeasurementType(){
+        return "LENGTH";
     }
 }

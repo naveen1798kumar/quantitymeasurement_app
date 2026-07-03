@@ -68,10 +68,17 @@ public enum WeightUnit implements IMeasurable {
 //
 //    }
 
-    @Override
-    public Class<?> getMeasurementType() {
+//    @Override
+//    public Class<?> getMeasurementType() {
+//
+//        return WeightUnit.class;
+//
+//    }
 
-        return WeightUnit.class;
+    @Override
+    public String getMeasurementType() {
+
+        return "WEIGHT";
 
     }
 }

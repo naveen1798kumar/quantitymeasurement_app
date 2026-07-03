@@ -3,14 +3,46 @@ package com.app.quantitymeasurement;
 import com.app.quantitymeasurement.controller.QuantityMeasurementController;
 import com.app.quantitymeasurement.entity.Quantity;
 import com.app.quantitymeasurement.repository.IQuantityMeasurementRepository;
-import com.app.quantitymeasurement.repository.QuantityMeasurementCacheRepository;
+import com.app.quantitymeasurement.repository.QuantityMeasurementDatabaseRepository;
 import com.app.quantitymeasurement.service.IQuantityMeasurementService;
 import com.app.quantitymeasurement.service.QuantityMeasurementServiceImpl;
 import com.app.quantitymeasurement.unit.Unit;
 
+import com.app.quantitymeasurement.util.DatabaseInitializer;
+
+import com.app.quantitymeasurement.util.ApplicationConfig;
+
+// DB connection
+
+import com.app.quantitymeasurement.util.ConnectionPool;
+
+import java.sql.Connection;
+
 public class QuantityMeasurementApp {
 
     public static void main(String[] args) {
+
+        ApplicationConfig config =
+
+                ApplicationConfig.getInstance();
+
+        System.out.println(
+
+                config.getApplicationName()
+
+        );
+
+        System.out.println(
+
+                config.getDatabaseUrl()
+
+        );
+
+        System.out.println(
+
+                config.getRepositoryType()
+
+        );
 
         // ==========================
         // Repository Layer
@@ -18,7 +50,38 @@ public class QuantityMeasurementApp {
 
         IQuantityMeasurementRepository repository =
 
-                new QuantityMeasurementCacheRepository();
+                new QuantityMeasurementDatabaseRepository();
+
+        // =========================
+        // Connection Pool
+
+        Connection connection =
+
+                ConnectionPool.getConnection();
+
+        System.out.println(
+
+                "Database Connected Successfully."
+
+        );
+
+        ConnectionPool.closeConnection(
+
+                connection
+
+        );
+
+        // ==========================
+        // Database Initializer
+        // ==========================
+
+        DatabaseInitializer.initializeDatabase();
+
+        System.out.println(
+
+                "Database Initialized Successfully."
+
+        );
 
         // ==========================
         // Service Layer

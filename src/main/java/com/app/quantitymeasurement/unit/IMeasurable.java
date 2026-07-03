@@ -48,9 +48,11 @@ public interface IMeasurable {
         }
     }
 
-    default Class<?> getMeasurementType() {
+//    default Class<?> getMeasurementType() {
+//
+//        return getClass();
+//
+//    }
 
-        return getClass();
-
-    }
+    String getMeasurementType();
 }
